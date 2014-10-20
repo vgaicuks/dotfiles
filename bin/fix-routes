@@ -4,6 +4,22 @@ GW=$(netstat -rn | grep default | grep -E '(en1|en2)' | head -n 1 | awk '{ print
 
 echo "* Routing external traffic through $GW"
 
+# new EPS
+sudo route delete 212.70.169.55
+sudo route add 212.70.169.55 $GW
+sudo route delete 193.111.244.133
+sudo route add 193.111.244.133 $GW
+sudo route delete 85.31.100.2
+sudo route add 85.31.100.2 $GW
+sudo route delete 85.31.97.194
+sudo route add 85.31.97.194 $GW
+sudo route delete 193.46.236.29
+sudo route add 193.46.236.29 $GW
+sudo route delete 85.254.157.10
+sudo route add 85.254.157.10 $GW
+sudo route delete 109.229.196.62
+sudo route add 109.229.196.62 $GW
+
 sudo route delete 92.240.68.39
 sudo route add    92.240.68.39 $GW
 sudo route delete 85.31.101.151
@@ -36,3 +52,11 @@ sudo route add    74.125.43.108 $GW
 # last.fm
 sudo route delete 195.24.232.203
 sudo route add    195.24.232.203 $GW
+
+# freenode.net
+sudo route delete 128.237.157.136
+sudo route add    128.237.157.136 $GW
+
+
+# VPN
+# sudo route add 192.168.2.61 172.19.1.249

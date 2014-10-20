@@ -11,6 +11,7 @@ complete -o default -o nospace -F _git_commit gc
 complete -o default -o nospace -F _git_diff gd
 complete -o default -o nospace -F _git_diff gdc
 complete -o default -o nospace -F _git_diff gdcs
+complete -o default -o nospace -W "$(/usr/bin/env ruby -ne 'puts $_.split(/[,\s]+/)[1..-1].reject{|host| host.match(/\*|\?/)} if $_.match(/^\s*Host\s+/);' < $HOME/.ssh/config)" scp sftp ssh
 source ~/.bash/completions/subversion
 source ~/.bash/completions/mategem
 source ~/.bash/completions/bundler
@@ -18,6 +19,9 @@ complete -C ~/.bash/completions/rake -o default rake
 complete -C ~/.bash/completions/project -o default c
 complete -C ~/.bash/completions/project -o default cm
 complete -C ~/.bash/completions/capistrano -o default cap
+source ~/.bash/completions/django_bash_completion
+
+
 
 source ~/.bash/paths
 
@@ -26,9 +30,9 @@ _user_root() { [ $USER == "root" ] && printf 'root '; }
 _rvm_prompt() { local s=$(rvm-prompt v g); printf "${s:+ ${s}}"; }
 export PS1="[ \[\e[31;1m\]\$(_user_root)\[\e[35;1m\]\w\[\e[33;1m\]\$(_rvm_prompt)\[\e[34;1m\]\$(_scm_info)\[\e[0m\] ]\[\e[32;1m\] %\[\e[0m\] "
 
-export PATH=$HOME/bin:$HOME/.gem/ruby/1.8/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:$PATH
-export EDITOR="mate -w"
-export SVN_EDITOR=$EDITOR
+export PATH=$HOME/bin:$HOME/.gem/ruby/1.8/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/usr/local/bin:$PATH
+export EDITOR="s"
+export SVN_EDITOR=vi
 # stty erase ^H # brakes backspace in vim
 
 ### Bash http://blog.macromates.com/2008/working-with-history-in-bash/
@@ -42,11 +46,20 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 
 ### Ruby
 export GEM_HOME=$HOME/.gem/ruby/1.8
-export RUBY_HEAP_MIN_SLOTS=500000
-export RUBY_HEAP_SLOTS_INCREMENT=250000
-export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-export RUBY_GC_MALLOC_LIMIT=50000000
-export RUBY_HEAP_FREE_MIN=100000
+export RUBY_GC_MALLOC_LIMIT=90000000
+export RUBY_FREE_MIN=200000
+# export RUBY_HEAP_MIN_SLOTS=500000
+# export RUBY_HEAP_SLOTS_INCREMENT=250000
+# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+# export RUBY_GC_MALLOC_LIMIT=50000000
+# export RUBY_HEAP_FREE_MIN=100000
+
+#export GEM_HOME=$HOME/.gem/ruby/1.9
+#export RUBY_HEAP_MIN_SLOTS=1000000
+#export RUBY_HEAP_SLOTS_INCREMENT=1000000
+#export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+#export RUBY_GC_MALLOC_LIMIT=1000000000
+#export RUBY_HEAP_FREE_MIN=500000
 
 ### Oracle
 export ORACLE_IC_HOME=$HOME/Library/Oracle/instantclient
@@ -62,3 +75,7 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 ### Homebrew
 export PATH=$HOME/.homebrew/sbin:$HOME/.homebrew/bin:$PATH
 export MANPATH=$HOME/.homebrew/share/man:$MANPATH
+
+### Locales
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8

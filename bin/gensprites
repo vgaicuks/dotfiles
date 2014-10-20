@@ -1,0 +1,18 @@
+#!/bin/bash
+STATICDIR="static_src"
+SPRITES_PATH="./$STATICDIR/img"
+
+SPRITES_DIR="$SPRITES_PATH/sprite/"
+SPRITES_X_DIR="$SPRITES_PATH/sprite-x/"
+SPRITES_Y_DIR="$SPRITES_PATH/sprite-y/"
+
+
+if [ -d $SPRITES_DIR ]; then
+   glue $SPRITES_DIR --namespace=s --sprite-namespace= --less=./$STATICDIR/css/ --crop --img=./$STATICDIR/img/ --recursive
+fi
+
+if [ -d $SPRITES_X_DIR ]; then
+   glue $SPRITES_X_DIR --namespace=s --sprite-namespace= --less=./$STATICDIR/css/ --crop --algorithm=vertical --img=./$STATICDIR/img/ --recursive
+fi
+#glue ./$STATICDIR/img/sprite-y --namespace=s --sprite-namespace= --less --crop --algorithm=horizontal  --img=./$STATICDIR/img/ --css=./$STATICDIR/css/ --global-template="%(all_classes)s{background-image:url('%(sprite_url)s');background-repeat:repeat-y}\n"
+

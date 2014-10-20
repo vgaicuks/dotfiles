@@ -1,0 +1,8 @@
+#!/bin/bash
+
+
+python -c "from math import *; print $1"
+
+# #code for OSX - copy to clipboard
+# python -c "from math import *; print $1" | pbcopy
+# pbpaste # show the result in bash

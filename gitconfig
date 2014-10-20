@@ -1,12 +1,12 @@
 [user]
 	email = vitalijs.gaicuks@gmail.com
-	name = vgaicuks
+	name = Vitālijs Gaičuks
 [alias]
   co = checkout
 [apply]
   whitespace = nowarn
 [core]
-  editor = mate -w
+	editor = vim
   excludesfile = ~/.gitignore
 [branch]
   autosetuprebase = always
@@ -28,3 +28,5 @@
   added = yellow bold
   changed = red bold # also deleted
   untracked = black bold
+[push]
+	default = simple

@@ -1,0 +1,51 @@
+#!/bin/bash
+
+usage(){
+cat << EOF
+usage: cp2utf FILE [-h] [-s] -- program to convert from WINDOWS-1257 to UTF-8 encoding
+
+where:
+    -h  show this help text
+    -s  convert to the FILE, else output on STDOUT
+EOF
+}
+
+convert_to_the_same_file(){
+  iconv -t UTF-8 -f WINDOWS-1257 "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
+}
+
+convert_and_output(){
+  iconv -t UTF-8 -f WINDOWS-1257 "$FILE"
+}
+
+FILE=$1
+MOVE=0
+if [ ! -f $FILE ]
+then
+  echo 'File does not exist!'
+  usage
+  exit 0
+fi
+
+shift
+
+while getopts "hs" optname; do
+  case "$optname" in
+    s)  MOVE=1
+        ;;
+    h)  usage
+        exit
+        ;;
+    # *)  convert_and_output
+    #     echo "convert_and_output"
+    #     exit
+    #     ;;
+  esac
+done
+
+if [ $MOVE -eq 1 ]
+then
+  convert_to_the_same_file
+else
+  convert_and_output
+fi

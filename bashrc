@@ -4,6 +4,7 @@
 
 source ~/.bash/config
 
+[[ -r $rvm_path/scripts/completion ]] && . $rvm_path/scripts/completion
 
 if [ -s ~/.rvm/scripts/rvm ] ; then
   source ~/.rvm/scripts/rvm

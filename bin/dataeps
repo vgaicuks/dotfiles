@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby -wU
+# encoding: UTF-8
+raise ArgumentError, 'No argumnent defined: Usage: dataeps.rb iki-2008' unless ARGV[0]
+
+issue = ARGV[0].upcase
+file_name = "#{Time.now.strftime '%Y%m%d%H%M%S'}_#{issue}_VGA.sql"
+
+sql_content = <<-SQL
+/**
+@File      #{file_name}
+@Author    Vitālijs Gaičuks
+@Changes
+@DependsOn
+@Issues    #{issue}
+**/
+--CONNECT &IKS1
+
+SET SERVEROUT ON SIZE 1000000
+DECLARE
+    v_xxte_cnt                 NUMBER;
+    v_xxte_file_name           VARCHAR2(250 CHAR) := '#{file_name}';
+    v_xxte_reexecutable        VARCHAR2(1 CHAR) := 'N';
+    v_xxt_dependency_ok        NUMBER;
+    e_script_dependency_nok    EXCEPTION;
+BEGIN
+    v_xxt_dependency_ok := sko_audit.check_data_extra_dependency('');
+
+    IF v_xxt_dependency_ok = 0 THEN
+        RAISE e_script_dependency_nok;
+    END IF;
+
+    SELECT 1
+      INTO v_xxte_cnt
+      FROM xxte_data_fix_registry t
+     WHERE UPPER(t.script_name) = UPPER(v_xxte_file_name)
+       AND t.reexecutable <> 'Y'
+       AND ROWNUM < 2;
+
+    dbms_output.put_line('Datu labojums jau ir uzlikts un nav atkārtoti laižams');
+EXCEPTION
+    -- Ja nav uzlikti saistosie skripti
+    WHEN e_script_dependency_nok THEN
+        NULL;
+    -- Ja datu labojums nav uzlikts
+    WHEN NO_DATA_FOUND THEN
+
+-- Datu labojums
+
+LIEC_SAVU_DATU_LABOJUMU
+
+dbms_output.put_line('Laboto rakstu skaits: ' || SQL%ROWCOUNT);
+dbms_output.put_line('Uzlikts datu labojums');
+-- /Datu labojums
+
+        INSERT INTO xxte_data_fix_registry(
+            ID
+           ,install_date
+           ,script_name
+           ,reexecutable
+        ) VALUES (
+            xxte_data_fix_seq.NEXTVAL
+           ,SYSDATE
+           ,v_xxte_file_name
+           ,v_xxte_reexecutable
+        );
+END;
+/
+SHOW ERRORS
+SQL
+
+if File.open("#{file_name}", 'w') { |f| f.write sql_content }
+  puts "File #{file_name} was created"
+end
+
+system "svn add #{file_name}"

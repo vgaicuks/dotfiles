@@ -1,0 +1,34 @@
+#!/bin/bash
+SVN_TAG='/Users/vital/code/latest_tag_eps/eps'
+SVN_LINK=http://10.1.1.90:8888/svn/lad
+OLD_PWD=$( pwd )
+cd $SVN_TAG
+SVN_LAST_TAG_NR=${1-`svn ls ^/tags | tail -1 | sed 's/\///'`}
+
+if [[ "$SVN_LAST_TAG_NR" =~ "." ]] || [ -n "$1" ]; then
+  echo -n
+else
+  select SVN_LAST_TAG_NR in $( svn ls ^/tags | tail -3 )
+  do break
+  done
+fi
+
+# get old tag number
+SVN_OLD_TAG=$( svn info "$SVN_TAG" | sed -n 's/.*tags\///p' )
+SVN_OLD_TAG_NR=$( echo -n "$SVN_OLD_TAG" | sed 's/\/.*//' )
+if [ "$SVN_LAST_TAG_NR" == "$SVN_OLD_TAG_NR" ]; then
+  echo "ALREADY ON TAG ($SVN_OLD_TAG_NR)"
+  exit 1
+fi
+
+# updating svn
+echo "UPDATING SVN"
+svn up
+
+SVN_TAG_DIR=$( echo -n "$SVN_OLD_TAG" | sed 's/[^/]*\///' )
+
+echo "SWITCHING FROM $SVN_OLD_TAG_NR/$SVN_TAG_DIR => $SVN_LAST_TAG_NR/$SVN_TAG_DIR"
+
+svn sw ^/tags/$SVN_LAST_TAG_NR/$SVN_TAG_DIR
+
+#cd "$OLD_PWD"

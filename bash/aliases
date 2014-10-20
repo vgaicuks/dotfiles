@@ -5,6 +5,9 @@ function c { cd ~/code/$1; }
 alias reload='. ~/.bash_profile'
 alias quit='exit'
 alias ..='cd ..'
+alias grep='grep --color'
+alias sublsnippet='cd "/Users/vital/Library/Application Support/Sublime Text 2/Packages"'
+alias youtube-extract-music='youtube-dl --extract-audio --audio-format mp3 -lci'
 
 # kill
 alias k='kill'
@@ -24,12 +27,15 @@ alias lh='ls -la | grep ":[0-9]* \."' # show only hidden files
 # git
 alias g='git'
 alias gpll='git pull'
+alias gu='git pull'
 alias gpsh='git push'
+alias gp='git push'
 alias gd='git diff'
 alias gds='git diff --stat'
 alias gdc='git diff --cached'
 alias gdcs='git diff --cached --stat'
-alias gc='git commit -m $1'
+alias gc='git commit'
+alias gcm='git commit -m $1'
 alias gci='git commit'
 alias gco='git checkout'
 alias gb='git branch'
@@ -50,13 +56,18 @@ function _rails() {
     script/rails $command $*
   elif [ -x script/$command ]; then
     script/$command $*
+  elif [ -x `which rails` ]; then
+    rails $command $*
   else
     echo "no script/rails or script/$command found" >&2
   fi
 }
 alias sc='_rails console'
+alias rc='_rails console'
 alias ss='_rails server'
+alias rs='_rails server'
 alias sg='_rails generate'
+alias rg='_rails generate'
 alias sd='_rails destroy'
 
 alias tlog='tail -f log/development.log log/test.log'
@@ -64,6 +75,49 @@ alias tlog='tail -f log/development.log log/test.log'
 # sqlplus with readline
 alias sqlplus="rlwrap sqlplus"
 
+#alias e01='env NLS_LANG=LATVIAN_LATVIA.BLT8MSWIN1257 sqlplus password/eps@eps1.ss.lv @'
+#alias e02='env NLS_LANG=LATVIAN_LATVIA.BLT8MSWIN1257 sqlplus password/eps@eps2.ss.lv @'
+
+# oracle
+alias oracle-start='cd /oracle/vagrant-oracle-xe/ && sudo vagrant up'
+
 # vi
 alias vi='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
+
+# wkhtmltopdf
+alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
+
+# svn
+function sm { svn merge -c "$@" `svn info | sed -n -e '/URL: / s/trunk/tags/' -e 's/URL: //' -e 's/tags\/[.0-9]*/trunk/ p'`; }
+function smlog { svn ci -m "`svn propget svn:log -r "$@" --revprop  ^/trunk/rails/eps`"; }
+
+# python virtual env
+function pa () {
+    CURRENT_DIR=${PWD##*/}
+    VIRTUALENV_DIR=e-$CURRENT_DIR
+    if [ -d $VIRTUALENV_DIR ]
+    then
+        :
+    elif [ -d ../$VIRTUALENV_DIR ]
+    then
+        cd ..
+    else
+        echo "Virtualenv not found."
+        return 1
+    fi
+
+    #echo "Activating virtualenv $CURRENT_DIR..."
+    . $VIRTUALENV_DIR/bin/activate
+
+    if [ -d $CURRENT_DIR ]
+    then
+        cd $CURRENT_DIR
+    fi
+
+}
+
+function spack { s $VIRTUAL_ENV/lib/python?.?/site-packages/"$@"; }
+
+# mount
+alias mount_qwe='sudo mount_nfs -P -o resvport,locallocks,intr,soft,wsize=32768,rsize=3276 home.qwe.lv:/www /mnt/home.qwe.lv'
