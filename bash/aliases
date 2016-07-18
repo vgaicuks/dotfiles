@@ -116,8 +116,16 @@ function pa () {
     fi
 
 }
+# django
+alias dr='./manage.py runserver'
+alias dmm='./manage.py makemigrations'
+alias dm='./manage.py migrate'
 
 function spack { s $VIRTUAL_ENV/lib/python?.?/site-packages/"$@"; }
 
 # mount
 alias mount_qwe='sudo mount_nfs -P -o resvport,locallocks,intr,soft,wsize=32768,rsize=3276 home.qwe.lv:/www /mnt/home.qwe.lv'
+alias mount_rio='sudo mount_nfs -P -o resvport,locallocks,intr,soft,wsize=32768,rsize=3276 rio.trialine.lv:/var/www /mnt/rio.trialine.lv'
+
+# pretty json
+alias prettyjson='python -m json.tool'

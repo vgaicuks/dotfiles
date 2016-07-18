@@ -1,7 +1,7 @@
 _scm_info() {
   local s=
   # skip on NFS
-  if [[ $PWD =~ 'home.qwe.lv' ]] ; then
+  if [[ $PWD =~ 'rio.trialine.lv' ]] ; then
     s=""
   elif [[ -d ".svn" ]] ; then
     local r=$(svn info | sed -n -e '/^Revision: \([0-9]*\).*$/s//\1/p' )
