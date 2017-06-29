@@ -6,8 +6,6 @@ alias reload='. ~/.bash_profile'
 alias quit='exit'
 alias ..='cd ..'
 alias grep='grep --color'
-alias sublsnippet='cd "/Users/vital/Library/Application Support/Sublime Text 2/Packages"'
-alias youtube-extract-music='youtube-dl --extract-audio --audio-format mp3 -lci'
 
 # kill
 alias k='kill'
@@ -84,9 +82,6 @@ alias oracle-start='cd /oracle/vagrant-oracle-xe/ && sudo vagrant up'
 # vi
 alias vi='/Applications/MacVim.app/Contents/MacOS/Vim'
 alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-
-# wkhtmltopdf
-alias wkhtmltopdf='/Applications/wkhtmltopdf.app/Contents/MacOS/wkhtmltopdf'
 
 # svn
 function sm { svn merge -c "$@" `svn info | sed -n -e '/URL: / s/trunk/tags/' -e 's/URL: //' -e 's/tags\/[.0-9]*/trunk/ p'`; }
