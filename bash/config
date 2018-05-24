@@ -33,7 +33,7 @@ _rvm_prompt() { local s=$(rvm-prompt v g); printf "${s:+ ${s}}"; }
 # without rvm version
 export PS1="[ \[\e[31;1m\]\$(_user_root)\[\e[35;1m\]\w\[\e[33;1m\]\[\e[34;1m\]\$(_scm_info)\[\e[0m\] ]\[\e[32;1m\] %\[\e[0m\] "
 
-export PATH=$HOME/bin:$HOME/.gem/ruby/1.8/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:$HOME/.gem/ruby/1.8/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/usr/local/bin:/usr/local/Cellar/python3/3.6.3/bin:$PATH
 export EDITOR="s"
 export SVN_EDITOR=vi
 # stty erase ^H # brakes backspace in vim
@@ -48,9 +48,9 @@ export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 ### Ruby
-export GEM_HOME=$HOME/.gem/ruby/1.8
-export RUBY_GC_MALLOC_LIMIT=90000000
-export RUBY_FREE_MIN=200000
+#export GEM_HOME=$HOME/.gem/ruby/1.8
+#export RUBY_GC_MALLOC_LIMIT=90000000
+#export RUBY_FREE_MIN=200000
 # export RUBY_HEAP_MIN_SLOTS=500000
 # export RUBY_HEAP_SLOTS_INCREMENT=250000
 # export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
@@ -88,3 +88,7 @@ export LC_ALL=en_US.UTF-8
 
 ### Curl
 # export CURL_CA_BUNDLE=/usr/local/Cellar/curl/7.37.1_1/cert/curl-ca-bundle.crt
+
+### Open SSL
+export CPPFLAGS=-I/usr/local/opt/openssl/include
+export LDFLAGS=-L/usr/local/opt/openssl/lib
