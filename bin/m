@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+  if [ -e TODO.md ]; then
+    atom . TODO.md
+  elif [ -e README.md ]; then
+    atom . README.md
+  else
+    atom .
+  fi
+else
+  atom $@
+fi

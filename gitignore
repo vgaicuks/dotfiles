@@ -1,7 +1,11 @@
 .DS_Store
 *~
 .~*
+~*
 sqlnet.log
 mkmf.log
+TODO.md
 .rvmrc
 .powenv
+.ruby-gemset
+.vscode

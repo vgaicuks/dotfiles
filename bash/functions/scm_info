@@ -15,7 +15,7 @@ _scm_info() {
         s="$b"
       elif [[ -d .git/rebase-apply || -d .git/rebase-merge ]]; then
         s="$b <"
-      elif [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit, working directory clean" ]]; then
+      elif [[ $(git status 2> /dev/null | tail -n1) != nothing* ]]; then
         s="$b *"
       else
         s="$b"

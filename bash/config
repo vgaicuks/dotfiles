@@ -11,23 +11,19 @@ complete -o default -o nospace -F _git_commit gc
 complete -o default -o nospace -F _git_diff gd
 complete -o default -o nospace -F _git_diff gdc
 complete -o default -o nospace -F _git_diff gdcs
-complete -o default -o nospace -W "$(/usr/bin/env ruby -ne 'puts $_.split(/[,\s]+/)[1..-1].reject{|host| host.match(/\*|\?/)} if $_.match(/^\s*Host\s+/);' < $HOME/.ssh/config)" scp sftp ssh
-source ~/.bash/completions/subversion
 source ~/.bash/completions/mategem
 source ~/.bash/completions/bundler
+source ~/.bash/completions/project
 complete -C ~/.bash/completions/rake -o default rake
-complete -C ~/.bash/completions/project -o default c
-complete -C ~/.bash/completions/project -o default cm
 complete -C ~/.bash/completions/capistrano -o default cap
 source ~/.bash/completions/django_bash_completion
 
 
 
-source ~/.bash/paths
-
 # prompt: [ root ~ master +? ] % cmd
 _user_root() { [ $USER == "root" ] && printf 'root '; }
 _rvm_prompt() { local s=$(rvm-prompt v g); printf "${s:+ ${s}}"; }
+<<<<<<< HEAD
 # with rvm version
 # export PS1="[ \[\e[31;1m\]\$(_user_root)\[\e[35;1m\]\w\[\e[33;1m\]\$(_rvm_prompt)\[\e[34;1m\]\$(_scm_info)\[\e[0m\] ]\[\e[32;1m\] %\[\e[0m\] "
 # without rvm version
@@ -36,6 +32,17 @@ export PS1="[ \[\e[31;1m\]\$(_user_root)\[\e[35;1m\]\w\[\e[33;1m\]\[\e[34;1m\]\$
 export PATH=$HOME/bin:$HOME/.gem/ruby/1.8/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:/usr/local/bin:/usr/local/Cellar/python3/3.6.3/bin:$PATH
 export EDITOR="s"
 export SVN_EDITOR=vi
+=======
+
+# Dark theme
+# export PS1="[ \[\e[31;1m\]\$(_user_root)\[\e[35;1m\]\w\[\e[33;1m\]\$(_rvm_prompt)\[\e[34;1m\]\$(_scm_info)\[\e[0m\] ]\[\e[32;1m\] %\[\e[0m\] "
+# Light theme
+export PS1="[ \[\e[31;1m\]\$(_user_root)\[\e[34;1m\]\w\[\e[30;1m\]\$(_rvm_prompt)\[\e[32;1m\]\$(_scm_info)\[\e[0m\] ]\[\e[31;1m\] %\[\e[0m\] "
+
+export PATH=./bin:$HOME/bin:$HOME/.gem/ruby/2.0.0/bin:/opt/local/bin:/opt/local/sbin:/sw/bin:$PATH
+export EDITOR="atom -w"
+export BUNDLER_EDITOR="atom"
+>>>>>>> upstream/master
 # stty erase ^H # brakes backspace in vim
 
 ### Bash http://blog.macromates.com/2008/working-with-history-in-bash/
@@ -43,26 +50,28 @@ export HISTCONTROL=erasedups
 export HISTSIZE=10000
 shopt -s histappend
 
+### LOCALE
+export LC_CTYPE=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 ### COLORS
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 ### Ruby
-#export GEM_HOME=$HOME/.gem/ruby/1.8
-#export RUBY_GC_MALLOC_LIMIT=90000000
+export GEM_HOME=$HOME/.gem/ruby/2.0.0
+#export RUBY_HEAP_MIN_SLOTS=500000
+export RUBY_GC_HEAP_INIT_SLOTS=500000
+export RUBY_HEAP_SLOTS_INCREMENT=250000
+export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
+export RUBY_GC_MALLOC_LIMIT=60000000
+export RUBY_GC_OLDMALLOC_LIMIT=60000000
+export RUBY_HEAP_FREE_MIN=200000
 #export RUBY_FREE_MIN=200000
-# export RUBY_HEAP_MIN_SLOTS=500000
-# export RUBY_HEAP_SLOTS_INCREMENT=250000
-# export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-# export RUBY_GC_MALLOC_LIMIT=50000000
-# export RUBY_HEAP_FREE_MIN=100000
+export RUBY_GC_HEAP_FREE_SLOTS=200000
 
-#export GEM_HOME=$HOME/.gem/ruby/1.9
-#export RUBY_HEAP_MIN_SLOTS=1000000
-#export RUBY_HEAP_SLOTS_INCREMENT=1000000
-#export RUBY_HEAP_SLOTS_GROWTH_FACTOR=1
-#export RUBY_GC_MALLOC_LIMIT=1000000000
-#export RUBY_HEAP_FREE_MIN=500000
+### Nodejs
+export PATH=$PATH:$HOME/.homebrew/share/npm/bin/
 
 ### Oracle
 #export ORACLE_IC_HOME=$HOME/Library/Oracle/instantclient
@@ -73,7 +82,9 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 #export SQLPATH=$HOME
 
 ### Java
-export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+export JAVA_HOME=$(/usr/libexec/java_home)
+export JRUBY_OPTS="--dev -J-Xmn128m -J-Xms256m -J-Xmx1024m -J-XX:ReservedCodeCacheSize=512M -J-XX:+TieredCompilation -J-Djruby.launch.inproc=true"
+export SBT_OPTS="-Xmn128m -Xms256m -Xmx1024m"
 
 ### Homebrew
 export PATH=$HOME/.homebrew/sbin:$HOME/.homebrew/bin:$PATH
@@ -86,9 +97,18 @@ export HOMEBREW_CELLAR=/usr/local/Cellar
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-### Curl
-# export CURL_CA_BUNDLE=/usr/local/Cellar/curl/7.37.1_1/cert/curl-ca-bundle.crt
-
 ### Open SSL
 export CPPFLAGS=-I/usr/local/opt/openssl/include
 export LDFLAGS=-L/usr/local/opt/openssl/lib
+
+### Docker
+# export DOCKER_HOST=tcp://localhost:2375
+# export DOCKER_HOST=tcp://192.168.59.103:2375
+# export DOCKER_HOST=tcp://192.168.33.10:2375
+
+### Caskroom
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+### Go
+# export GOPATH=/usr/local/Cellar/go
+# export PATH=$PATH:$GOPATH/bin
