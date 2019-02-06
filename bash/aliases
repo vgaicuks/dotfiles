@@ -97,6 +97,13 @@ function pa () {
     elif [ -d ../$VIRTUALENV_DIR ]
     then
         cd ..
+    elif [ -d .env ]
+    then
+        VIRTUALENV_DIR=.env
+    elif [ -d ../.env ]
+    then
+        cd ..
+        VIRTUALENV_DIR=.env
     else
         echo "Virtualenv not found."
         return 1
@@ -109,7 +116,6 @@ function pa () {
     then
         cd $CURRENT_DIR
     fi
-
 }
 # django
 alias dr='./manage.py runserver'
