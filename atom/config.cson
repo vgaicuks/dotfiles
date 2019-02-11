@@ -1,13 +1,13 @@
 "*":
-  editor:
-    showInvisibles: true
-    invisibles: {}
-    fontSize: 15
+  alignment: {}
   core:
-    themes: [
-      "one-light-ui"
-      "one-light-syntax"
+    disabledPackages: [
+      "whitespace"
+      "welcome"
+      "linter-jshint"
+      "linter-xmllint"
     ]
+    excludeVcsIgnoredPaths: false
     ignoredNames: [
       ".git"
       ".svn"
@@ -25,23 +25,21 @@
       "protected"
       "uploads"
     ]
-    disabledPackages: [
-      "whitespace"
-      "welcome"
-      "linter-jshint"
-      "linter-xmllint"
+    themes: [
+      "one-light-ui"
+      "one-light-syntax"
     ]
-    excludeVcsIgnoredPaths: false
+  editor:
+    fontSize: 15
+    invisibles: {}
+    showInvisibles: true
   "exception-reporting":
     userId: "5d4c374d-930e-f430-09a9-2b853f663818"
-  "release-notes":
-    viewedVersion: "0.84.0"
-  welcome:
-    showOnStartup: false
-  metrics:
-    userId: "93502b042e225d375f200869bf82b200dd55333c"
-  "tree-view":
-    showOnRightSide: true
+  "fuzzy-finder": {}
+  linter:
+    lintOnChange: false
+    lintOnEditorFocus: false
+  "linter-coffeelint": {}
   "markdown-preview":
     grammars: [
       "source.gfm"
@@ -49,6 +47,13 @@
       "text.plain"
       "text.plain.null-grammar"
     ]
+  metrics:
+    userId: "93502b042e225d375f200869bf82b200dd55333c"
+  "one-light-ui": {}
+  "release-notes":
+    viewedVersion: "0.84.0"
+  "ruby-test":
+    specFramework: "rspec"
   "spell-check":
     grammars: [
       "source.gfm"
@@ -56,13 +61,7 @@
       "text.plain"
       "text.plain.null-grammar"
     ]
-  "linter-coffeelint": {}
-  linter:
-    lintOnChange: false
-    lintOnEditorFocus: false
-  "fuzzy-finder": {}
-  "one-light-ui":
-    layoutMode: "Compact"
-  "ruby-test":
-    specFramework: "rspec"
-  alignment: {}
+  "tree-view":
+    showOnRightSide: true
+  welcome:
+    showOnStartup: false

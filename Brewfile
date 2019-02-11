@@ -1,103 +1,102 @@
 # Install command-line tools using Homebrew
 # Usage: `brew bundle Brewfile`
 
-tap homebrew/science
-tap gapple/services
-tap ebeigarts/homebrew-magic-lantern
+tap "brewsci/science"
+tap "gapple/services"
+tap "ebeigarts/homebrew-magic-lantern"
 
 # Make sure we’re using the latest Homebrew
-update
+#brew update
 
 # Upgrade any already-installed formulae
-upgrade
+#brew upgrade
 
 # Install packages
-install ack
-install aspell
-install autoconf
-install automake
-install awscli
-install bash
-install cabextract
-install cloc
-install cmake
-install colordiff
-install curl
-install fig
-install gawk
-install gdbm
-install gist
-install git
-install gnu-sed
-install gnutls
-install go
-install graphviz
-install htop-osx
-install hub
-install iperf
-install isync
-install libxml2
-install libxslt
-install libyaml
-install lynx
-install mcrypt
-install media-info
-install memcache-top
-install mercurial
-install monit
-install mpssh
-install nginx
-install nmap
-install node
-install npm
-install parallel
-install phantomjs
-install pwgen
-install python
-install R
-install rename
-install rlwrap
-install tig
-install trash
-install tree
-install unrar
-install watch
-install wget
+brew "ack"
+brew "aspell"
+brew "autoconf"
+brew "automake"
+brew "awscli"
+brew "bash"
+brew "cabextract"
+brew "cloc"
+brew "cmake"
+brew "colordiff"
+brew "curl"
+brew "fig"
+brew "gawk"
+brew "gdbm"
+brew "gist"
+brew "git"
+brew "gnu-sed"
+brew "gnutls"
+brew "go"
+brew "graphviz"
+brew "htop-osx"
+brew "hub"
+brew "iperf"
+brew "isync"
+brew "libxml2"
+brew "libxslt"
+brew "libyaml"
+brew "lynx"
+brew "mcrypt"
+brew "media-info"
+brew "memcache-top"
+brew "mercurial"
+brew "monit"
+brew "mpssh"
+brew "nginx"
+brew "nmap"
+brew "node"
+brew "npm"
+brew "parallel"
+brew "phantomjs"
+brew "pwgen"
+brew "python"
+brew "R"
+brew "rename"
+brew "rlwrap"
+brew "tig"
+brew "trash"
+brew "tree"
+brew "unrar"
+brew "watch"
+brew "wget"
 
 # Install databases and search engines
-install elasticsearch
-install memcached
-install mongodb
-install mysql
-install freetds
-install redis
-install sqlite
-install postgresql
-install postgis
-install proj
-install gdal
-install geos
-install mdbtools
+# brew "elasticsearch"
+brew "memcached"
+brew "mongodb"
+brew "mysql"
+brew "freetds"
+brew "redis"
+brew "sqlite"
+brew "postgresql"
+brew "postgis"
+brew "proj"
+brew "gdal"
+brew "geos"
+brew "mdbtools"
 
 # Install image processing packages
-install imagemagick
-install exiftool
-install ufraw
-install jpegoptim
-install librsvg
-install --HEAD cr2hdr
-install --HEAD raw2dng
+brew "imagemagick"
+brew "exiftool"
+brew "ufraw"
+brew "jpegoptim"
+brew "optipng"
+brew "librsvg"
 
 # Install video packages
-install mediainfo
-install ffmpeg --with-tools --with-fdk-aac
-install gpac
-install mkvtoolnix
-install mplayer
+brew "mediainfo"
+brew "ffmpeg"
+brew "gpac"
+brew "mkvtoolnix"
+brew "mplayer"
 
 # Install extra filesystems support (NOT WORKING)
-# install osxfuse
-# install ext4fuse
+# brew osxfuse
+# brew ext4fuse
 
 # Remove outdated versions from the cellar
-cleanup
+# cleanup
