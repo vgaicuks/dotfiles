@@ -13,8 +13,7 @@ alias k9='kill -9'
 function ka { kill $(ps xc | grep -wi "$*" | awk '{print $1}'); }
 function ka9 { kill -9 $(ps xc | grep -wi "$*" | awk '{print $1}'); }
 
-# sublime text 3
-# function subl { /Applications/Sublime\ Text\ 3.app/Contents/SharedSupport/bin/subl -n ${*:-.}; }
+alias s='subl'
 
 # ls
 alias l='ls -1'
