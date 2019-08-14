@@ -13,7 +13,13 @@ alias k9='kill -9'
 function ka { kill $(ps xc | grep -wi "$*" | awk '{print $1}'); }
 function ka9 { kill -9 $(ps xc | grep -wi "$*" | awk '{print $1}'); }
 
-alias s='subl'
+# editors
+# sublime text 3
+# function subl { /Applications/Sublime\ Text\ 3.app/Contents/SharedSupport/bin/subl -n ${*:-.}; }
+alias s='/usr/local/bin/subl'
+# function s { subl -n ${*:-.}; }
+
+alias dapp4='dapp --use solc:0.4.24'
 
 # ls
 alias l='ls -1'
@@ -109,10 +115,11 @@ function pa () {
     elif [ -d .env ]
     then
         VIRTUALENV_DIR=.env
-    elif [ -d ../.env ]
+        CURRENT_DIR='.'
+    elif [ -d venv ]
     then
-        cd ..
-        VIRTUALENV_DIR=.env
+        VIRTUALENV_DIR=venv
+        CURRENT_DIR='.'
     else
         echo "Virtualenv not found."
         return 1
