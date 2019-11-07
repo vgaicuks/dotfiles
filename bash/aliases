@@ -10,8 +10,8 @@ alias grep='grep --color'
 # kill
 alias k='kill'
 alias k9='kill -9'
-function ka { kill $(ps xc | grep -wi "$*" | awk '{print $1}'); }
-function ka9 { kill -9 $(ps xc | grep -wi "$*" | awk '{print $1}'); }
+function ka { kill $(ps aux | grep -wi "$*" | grep -v grep | awk '{print $2}'); }
+function ka9 { kill -9 $(ps aux | grep -wi "$*" | grep -v grep | awk '{print $2}'); }
 
 # editors
 # sublime text 3
@@ -139,6 +139,7 @@ alias dmm='./manage.py makemigrations'
 alias dm='./manage.py migrate'
 
 function spack { s $VIRTUAL_ENV/lib/python?.?/site-packages/"$@"; }
+function cpack { code $VIRTUAL_ENV/lib/python?.?/site-packages/"$@"; }
 
 # mount
 # alias mount_qwe='sudo mount_nfs -P -o resvport,locallocks,intr,soft,wsize=32768,rsize=3276 home.qwe.lv:/www /mnt/home.qwe.lv'
@@ -146,3 +147,8 @@ alias mount_rio='sudo mount_nfs -P -o resvport,locallocks,intr,soft,wsize=32768,
 
 # pretty json
 alias prettyjson='python -m json.tool'
+
+# pyenv
+alias pyi='eval "$(pyenv init -)"'
+alias pye='eval "$(pyenv virtualenv-init -)"'
+

@@ -6,6 +6,7 @@ source ~/.bash/aliases
 
 source ~/.bash/completions/django_bash_completion
 source ~/.bash/completions/project
+source ~/.bash/completions/pyenv
 
 source ~/.bash/completions/git
 complete -o default -o nospace -F _git_checkout gco
